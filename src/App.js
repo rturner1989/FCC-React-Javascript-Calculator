@@ -1,10 +1,11 @@
 import React from "react";
+import Calculator from "./Calculator";
 
 function App() {
     return (
-        <div id="wrapper">
-            <p>Hello World</p>
-        </div>
+        <main>
+            <Calculator />;
+        </main>
     );
 }
 
