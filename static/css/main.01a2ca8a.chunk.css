@@ -1,0 +1,2 @@
+#calculator{background-color:#000;width:500px;height:750px;margin:auto;display:grid;grid-template-rows:1fr 3fr}.display{background-color:grey}#keypad{display:grid}.btn-container button{width:25%;height:100%}#clear,#zero{width:50%}#display,#id{font-size:3rem}
+/*# sourceMappingURL=main.01a2ca8a.chunk.css.map */
