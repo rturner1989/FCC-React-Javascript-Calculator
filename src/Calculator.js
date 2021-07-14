@@ -1,37 +1,34 @@
 import React, { useState } from "react";
 import Keypad from "./Keypad";
 import Display from "./Display";
+import * as math from "mathjs";
 
 const Calculator = () => {
-    const [display, setDisplay] = useState({ equation: "", result: 0 });
+    const [display, setDisplay] = useState("");
+    const [result, setResult] = useState(0)
 
-    const onButtonPress = (e) => {
-        let equation = display.equation;
-        const pressedButton = e.target.innerHTML;
-
-        if (pressedButton === "AC") {
-            setDisplay({ equation: "", result: 0 });
-        } else if (
-            (pressedButton >= "0" && pressedButton <= "9") ||
-            pressedButton === "."
-        ) {
-            equation += pressedButton;
-        } else if (["+", "-", "*", "/", "%"].indexOf(pressedButton) !== -1) {
-            equation += " " + pressedButton + " ";
-        } else if (pressedButton === "=") {
-            // call function here
-        } else {
-            // .trim removes whitespace from both ends of a string.
-            equation = equation.trim();
-            equation = equation.substr(0, equation.length - 1);
+    const handleClick = (value)=>{
+        
+        if(value === "." && ([...display].includes("."))){
+            return
+        } else if(value === "0" && display.charAt(0) === "0"){
+            return
         }
-        setDisplay({ equation: equation });
-    };
+        setDisplay((display)=>display + value);
+    }
+    const calculateResult = ()=>{
+        setResult(math.evaluate(display));
+        setDisplay(math.evaluate(display));
+    }
+    const clearInput = ()=>{
+        setDisplay("")
+        setResult(0)
+    }
 
     return (
         <div id="calculator">
-            <Display equation={display.equation} result={display.result} />
-            <Keypad onButtonPress={onButtonPress} />
+            <Display display={display} result={result} />
+            <Keypad  handleClick={handleClick} clearInput={clearInput} calculateResult={calculateResult}/>
         </div>
     );
 };
