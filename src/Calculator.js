@@ -1,34 +1,82 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Keypad from "./Keypad";
 import Display from "./Display";
 import * as math from "mathjs";
+import { string } from "mathjs";
 
 const Calculator = () => {
-    const [display, setDisplay] = useState("");
-    const [result, setResult] = useState(0)
+    const [equationDisplay, setEquationDisplay] = useState("");
+    const [calculatedResult, setCalculatedResult] = useState("0")
+    const [equals, setEquals] = useState(null)
+    
 
     const handleClick = (value)=>{
-        
-        if(value === "." && ([...display].includes("."))){
-            return
-        } else if(value === "0" && display.charAt(0) === "0"){
-            return
+        const numbers = new RegExp(/[0-9]/);
+        const operators = new RegExp(/[-,+,*,\/]/);
+        const decimal = new RegExp(/[.]/);
+        // if value matches a number
+        if(numbers.test(value)){
+            if(equals !== null){
+                setEquals(null);
+                setCalculatedResult("");
+                setEquationDisplay("");
+            }
+            if(calculatedResult.length === 1 && calculatedResult.charAt(0) === "0"){
+                setCalculatedResult(value);
+            } else {
+                setCalculatedResult((val)=> val += value);
+            }
+            if(operators.test(calculatedResult)){
+                setCalculatedResult(value);
+            } 
+            
+            setEquationDisplay((val)=> val += value);
+        } 
+        // if value matches an operator 
+        else if (operators.test(value)){
+            if(equals !== null){
+                setEquationDisplay(`${equals}${value}`);
+                setCalculatedResult(value);
+                setEquals(null);
+            } 
+            else if (operators.test(calculatedResult) && value !== "-"){
+                if(calculatedResult === "-"){
+                    setCalculatedResult(value);
+                    setEquationDisplay((val)=> val.substr(0, val.length -2)+ value);
+                } else {
+                    setCalculatedResult(value);
+                    setEquationDisplay((val)=> val.substr(0, val.length -1)+ value);
+                }
+            } else {
+                    setCalculatedResult(value);
+                    setEquationDisplay((val)=> val += value);
+            }
         }
-        setDisplay((display)=>display + value);
+        // if value matches a decimal
+        else if(decimal.test(value)){
+            if(!calculatedResult.includes(value)){
+                setEquationDisplay((val) => val += value);
+                setCalculatedResult((val) => val += value);
+            } 
+        }
+        
     }
-    const calculateResult = ()=>{
-        setResult(math.evaluate(display));
-        setDisplay(math.evaluate(display));
+    const calculate = ()=>{
+        const result = math.evaluate(equationDisplay);
+        setCalculatedResult(result);
+        setEquationDisplay((val)=> val += `=${result}`)
+        setEquals(result)
     }
     const clearInput = ()=>{
-        setDisplay("")
-        setResult(0)
+        setEquationDisplay("")
+        setCalculatedResult("0")
     }
+    
 
     return (
         <div id="calculator">
-            <Display display={display} result={result} />
-            <Keypad  handleClick={handleClick} clearInput={clearInput} calculateResult={calculateResult}/>
+            <Display  equationDisplay={equationDisplay} calculatedResult={calculatedResult} />
+            <Keypad  handleClick={handleClick} clearInput={clearInput} calculate={calculate}/>
         </div>
     );
 };

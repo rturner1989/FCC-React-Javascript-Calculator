@@ -1,6 +1,6 @@
 import React from "react";
 
-const Keypad = ({handleClick, clearInput, calculateResult}) => {
+const Keypad = ({handleClick, clearInput, calculate}) => {
     return (
         <section id="keypad">
             <section className="btn-container">
@@ -61,7 +61,7 @@ const Keypad = ({handleClick, clearInput, calculateResult}) => {
                 <button id="decimal" onClick={(e)=>handleClick(e.target.innerHTML)}>
                     .
                 </button>
-                <button id="equals" onClick={()=>calculateResult()} >
+                <button id="equals" onClick={()=>calculate()} >
                     =
                 </button>
             </section>

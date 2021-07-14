@@ -1,14 +1,10 @@
 import React from "react";
 
-const Display = ({ display, result }) => {
+const Display = ({ equationDisplay, calculatedResult}) => {
     return (
         <section className="display">
-            <div>
-                <h1 id="result" className="result-screen">{result}</h1>
-            </div>
-            <div>
-                <h3 id="display"  className="computation-screen">{result === 0? display:result}</h3>
-            </div>
+            <h3 id="input">{equationDisplay}</h3>
+            <h1 id="display" >{calculatedResult}</h1>
         </section>
     );
 };
