@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Keypad from "./Keypad";
-import Display from "./Display";
+import Keypad from "./Components/Keypad";
+import Display from "./Components/Display";
 import * as math from "mathjs";
 
 const Calculator = () => {
@@ -16,6 +16,10 @@ const Calculator = () => {
                 setEquationDisplay((val) => (val += value));
                 setCalculatedResult((val) => (val += value));
             }
+        }
+        if (value === "Backspace") {
+            setEquationDisplay((val) => val.substr(0, val.length - 1));
+            setCalculatedResult((val) => val.substr(0, val.length - 1));
         }
     };
 
