@@ -17,7 +17,7 @@ const Calculator = () => {
                 setCalculatedResult((val) => (val += value));
             }
         }
-        if (value === "Backspace") {
+        if (value === "backspace") {
             setEquationDisplay((val) => val.substr(0, val.length - 1));
             setCalculatedResult((val) => val.substr(0, val.length - 1));
         }

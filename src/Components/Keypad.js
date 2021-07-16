@@ -1,4 +1,5 @@
 import React from "react";
+import { BsArrowLeft } from "react-icons/bs";
 
 const Keypad = ({
     handleClick,
@@ -9,24 +10,19 @@ const Keypad = ({
 }) => {
     return (
         <section id="keypad">
-            <button
-                id="clear"
-                onClick={() => clearInput()}
-                style={{ backgroundColor: " #d0d0d0 " }}
-            >
+            <button id="clear" onClick={() => clearInput()}>
                 AC
             </button>
             <button
                 id="backspace"
-                onClick={(e) => handleClick(e.target.innerHTML)}
-                style={{ backgroundColor: " #d0d0d0 " }}
+                value="backspace"
+                onClick={(e) => handleClick(e.target.value)}
             >
-                Backspace
+                <BsArrowLeft />
             </button>
             <button
                 id="divide"
                 onClick={(e) => handleOperators(e.target.innerHTML)}
-                style={{ backgroundColor: "#ecb700" }}
             >
                 /
             </button>
@@ -51,7 +47,6 @@ const Keypad = ({
             <button
                 id="multiply"
                 onClick={(e) => handleOperators(e.target.innerHTML)}
-                style={{ backgroundColor: "#ecb700" }}
             >
                 *
             </button>
@@ -73,7 +68,6 @@ const Keypad = ({
             <button
                 id="subtract"
                 onClick={(e) => handleOperators(e.target.innerHTML)}
-                style={{ backgroundColor: "#ecb700" }}
             >
                 -
             </button>
@@ -92,7 +86,6 @@ const Keypad = ({
             <button
                 id="add"
                 onClick={(e) => handleOperators(e.target.innerHTML)}
-                style={{ backgroundColor: "#ecb700" }}
             >
                 +
             </button>
@@ -108,11 +101,7 @@ const Keypad = ({
             >
                 .
             </button>
-            <button
-                id="equals"
-                onClick={() => calculate()}
-                style={{ backgroundColor: "#ecb700" }}
-            >
+            <button id="equals" onClick={() => calculate()}>
                 =
             </button>
         </section>
