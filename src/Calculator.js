@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Keypad from "./Components/Keypad";
 import Display from "./Components/Display";
 import * as math from "mathjs";
@@ -18,11 +18,20 @@ const Calculator = () => {
 
     const handleKeyPress = (e) => {
         if (isNumber.test(e.key)) {
+            e.preventDefault();
             handleNumbers(e.key);
         } else if (isOperator.test(e.key)) {
+            e.preventDefault();
             handleOperators(e.key);
         } else if (e.keyCode === 8) {
+            e.preventDefault();
             backspace();
+        } else if (e.keyCode === 13) {
+            e.preventDefault();
+            calculate();
+        } else if (e.keyCode === 46) {
+            e.preventDefault();
+            clearInput();
         }
     };
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { BsArrowLeft } from "react-icons/bs";
 
 const Keypad = ({
@@ -9,9 +9,15 @@ const Keypad = ({
     clearInput,
     calculate,
 }) => {
+    const calcRef = useRef(null);
+
+    useEffect(() => {
+        calcRef.current.focus();
+    }, []);
+
     return (
         <section id="keypad" onKeyDown={handleKeyPress}>
-            <button id="clear" onClick={() => clearInput()}>
+            <button id="clear" ref={calcRef} onClick={() => clearInput()}>
                 AC
             </button>
             <button
