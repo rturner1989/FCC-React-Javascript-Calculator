@@ -5,11 +5,12 @@ const Keypad = ({
     handleClick,
     handleNumbers,
     handleOperators,
+    handleKeyPress,
     clearInput,
     calculate,
 }) => {
     return (
-        <section id="keypad">
+        <section id="keypad" onKeyDown={handleKeyPress}>
             <button id="clear" onClick={() => clearInput()}>
                 AC
             </button>

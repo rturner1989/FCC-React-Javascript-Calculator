@@ -6,6 +6,8 @@
     --big-number-color: rgb(197, 197, 197);
 }
 
+/* root */
+
 #root {
     display: flex;
     justify-content: center;

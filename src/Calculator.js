@@ -9,6 +9,22 @@ const Calculator = () => {
     const [equals, setEquals] = useState(null);
 
     const isOperator = new RegExp(/[-,+,*,\/]/);
+    const isNumber = new RegExp(/[0-9]/);
+
+    const backspace = () => {
+        setEquationDisplay((val) => val.substr(0, val.length - 1));
+        setCalculatedResult((val) => val.substr(0, val.length - 1));
+    };
+
+    const handleKeyPress = (e) => {
+        if (isNumber.test(e.key)) {
+            handleNumbers(e.key);
+        } else if (isOperator.test(e.key)) {
+            handleOperators(e.key);
+        } else if (e.keyCode === 8) {
+            backspace();
+        }
+    };
 
     const handleClick = (value) => {
         if (value === ".") {
@@ -18,8 +34,7 @@ const Calculator = () => {
             }
         }
         if (value === "backspace") {
-            setEquationDisplay((val) => val.substr(0, val.length - 1));
-            setCalculatedResult((val) => val.substr(0, val.length - 1));
+            backspace();
         }
     };
 
@@ -88,6 +103,7 @@ const Calculator = () => {
                 handleClick={handleClick}
                 handleNumbers={handleNumbers}
                 handleOperators={handleOperators}
+                handleKeyPress={handleKeyPress}
                 clearInput={clearInput}
                 calculate={calculate}
             />
