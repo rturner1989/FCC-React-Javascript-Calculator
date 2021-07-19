@@ -6,6 +6,8 @@ import * as math from "mathjs";
 const Calculator = () => {
     const [equationDisplay, setEquationDisplay] = useState("");
     const [calculatedResult, setCalculatedResult] = useState("0");
+    const [prevCalculation, setPrevCalculation] = useState([]);
+    const [historyIndex, setHistoryIndex] = useState(null);
     const [equals, setEquals] = useState(null);
 
     const isOperator = new RegExp(/[-,+,*,\/]/);
@@ -15,6 +17,27 @@ const Calculator = () => {
         setEquationDisplay((val) => val.substr(0, val.length - 1));
         setCalculatedResult((val) => val.substr(0, val.length - 1));
     };
+
+    const historyBack = () => {
+        if (historyIndex !== null && historyIndex >= 0) {
+            clearInput();
+            setEquals(null);
+            setEquationDisplay(prevCalculation[historyIndex]);
+            setHistoryIndex(historyIndex - 1);
+        }
+    };
+    const historyForward = () => {
+        if (historyIndex !== null && historyIndex <= prevCalculation.length) {
+            clearInput();
+            setEquals(null);
+            setEquationDisplay(prevCalculation[historyIndex + 2]);
+            setHistoryIndex(historyIndex + 1);
+        }
+    };
+
+    useEffect(() => {
+        setHistoryIndex(prevCalculation.length - 1);
+    }, [prevCalculation]);
 
     const handleKeyPress = (e) => {
         if (isNumber.test(e.key)) {
@@ -32,6 +55,12 @@ const Calculator = () => {
         } else if (e.keyCode === 46) {
             e.preventDefault();
             clearInput();
+        } else if (e.keyCode === 38) {
+            e.preventDefault();
+            historyBack();
+        } else if (e.keyCode === 40) {
+            e.preventDefault();
+            historyForward();
         }
     };
 
@@ -95,6 +124,8 @@ const Calculator = () => {
             setCalculatedResult(result);
             setEquationDisplay((val) => (val += `=${result}`));
             setEquals(result);
+            setPrevCalculation((prevState) => [...prevState, equationDisplay]);
+            console.log(equationDisplay);
         }
     };
     const clearInput = () => {

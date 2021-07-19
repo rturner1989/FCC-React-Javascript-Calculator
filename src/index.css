@@ -111,3 +111,6 @@ button:hover {
     border-bottom-right-radius: 18px;
     background-color: rgb(218, 109, 47);
 }
+#up {
+    display: none;
+}

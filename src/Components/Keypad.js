@@ -111,6 +111,9 @@ const Keypad = ({
             <button id="equals" onClick={() => calculate()}>
                 =
             </button>
+            <button id="up" value="up">
+                up
+            </button>
         </section>
     );
 };
