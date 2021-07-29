@@ -1,14 +1,17 @@
 import React, { useRef, useEffect } from "react";
 import { BsArrowLeft } from "react-icons/bs";
+import { useGlobalContext } from "../Context";
 
-const Keypad = ({
-    handleClick,
-    handleNumbers,
-    handleOperators,
-    handleKeyPress,
-    clearInput,
-    calculate,
-}) => {
+const Keypad = () => {
+    const {
+        handleClick,
+        handleNumbers,
+        handleOperators,
+        handleKeyPress,
+        clearInput,
+        calculate,
+    } = useGlobalContext();
+
     const calcRef = useRef(null);
 
     useEffect(() => {

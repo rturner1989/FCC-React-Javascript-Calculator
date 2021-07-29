@@ -1,6 +1,9 @@
 import React from "react";
+import { useGlobalContext } from "../Context";
 
-const Display = ({ equationDisplay, calculatedResult }) => {
+const Display = () => {
+    const { equationDisplay, calculatedResult } = useGlobalContext();
+
     return (
         <section className="display">
             <h3 id="input">{equationDisplay}</h3>
