@@ -2,7 +2,11 @@ import { BsArrowLeft } from "react-icons/bs";
 
 const Data = [
     { id: "clear", value: "AC", display: "AC" },
-    { id: "backspace", value: "backspace", display: <BsArrowLeft /> },
+    {
+        id: "backspace",
+        value: "backspace",
+        display: <BsArrowLeft aria-hidden={true} focusable={false} />,
+    },
     { id: "divide", value: "/", display: "/" },
     { id: "seven", value: "7", display: "7" },
     { id: "eight", value: "8", display: "8" },

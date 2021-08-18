@@ -8,11 +8,18 @@
 
 /* root */
 
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 #root {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    width: 100vw;
     background: rgb(255, 143, 88);
     background: linear-gradient(
         140deg,
@@ -20,12 +27,14 @@
         rgba(191, 255, 240, 1) 100%
     );
     font-family: "Titillium Web", sans-serif;
-    font-size: 1.3rem;
+    font-size: 1.6rem;
 }
 
 /* calculator container */
 
 #calculator {
+    display: flex;
+    flex-direction: column;
     box-shadow: 0px 5px 40px 1px rgb(56, 56, 56);
     width: 380px;
     height: 560px;
@@ -35,6 +44,10 @@
 /* calculator display */
 
 .display {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
     background: rgb(35, 36, 53);
     background: linear-gradient(
         140deg,
@@ -44,11 +57,10 @@
     border-top-left-radius: 18px;
     border-top-right-radius: 18px;
     color: rgb(195, 195, 195);
-    height: 160px;
-    width: 380px;
-    padding: 30px 25px;
+    height: 30%;
+    width: 100%;
+    padding: 30px;
     overflow: auto;
-    scrollbar-width: none;
 }
 #input {
     margin: 0;
@@ -64,8 +76,8 @@
 /* calculator keypad */
 
 #keypad {
-    width: 380px;
-    height: 400px;
+    width: 100%;
+    height: 70%;
 }
 
 /* calculator buttons */
@@ -81,7 +93,10 @@ button:hover {
     color: white;
 }
 button:focus {
-    border: blue 1px solid;
+    border: blue 2px solid;
+}
+button:active {
+    border: none;
 }
 #clear {
     width: 50%;
@@ -119,4 +134,23 @@ button:focus {
     overflow: hidden;
     position: absolute;
     white-space: nowrap;
+}
+@media (max-width: 450px) {
+    #calculator {
+        width: 100vw;
+        height: 100vh;
+        max-height: 700px;
+        border-radius: 0;
+    }
+    .display {
+        border-radius: 0;
+    }
+
+    #keypad {
+        border-radius: 0;
+    }
+    #zero,
+    #equals {
+        border-radius: 0;
+    }
 }
