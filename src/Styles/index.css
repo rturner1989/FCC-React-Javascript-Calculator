@@ -135,9 +135,19 @@ button:active {
     position: absolute;
     white-space: nowrap;
 }
-@media (max-width: 450px) {
+@media screen and (max-width: 480px) {
+    html,
+    body {
+        overflow-x: hidden;
+    }
+    body {
+        position: relative;
+    }
     #calculator {
+        min-width: 350px;
         width: 100vw;
+        max-width: 450px;
+        min-height: 500px;
         height: 100vh;
         max-height: 700px;
         border-radius: 0;
