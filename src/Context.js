@@ -20,6 +20,7 @@ const AppProvider = ({ children }) => {
 
     const historyBack = () => {
         if (historyIndex !== null && historyIndex >= 0) {
+            clearInput();
             setEquals(null);
             setEquationDisplay(prevCalculation[historyIndex]);
             if (historyIndex > 0) {
@@ -32,6 +33,7 @@ const AppProvider = ({ children }) => {
             historyIndex !== null &&
             historyIndex < prevCalculation.length - 1
         ) {
+            clearInput();
             setEquals(null);
             setEquationDisplay(prevCalculation[historyIndex + 1]);
             setHistoryIndex(historyIndex + 1);
@@ -45,30 +47,30 @@ const AppProvider = ({ children }) => {
         } else if (isOperator.test(e.key)) {
             e.preventDefault();
             handleOperators(e.key);
-        } else if (e.keyCode === 8) {
+        } else if (e.key === "Backspace") {
             e.preventDefault();
             backspace();
-        } else if (e.keyCode === 13) {
+        } else if (e.key === "Enter") {
             e.preventDefault();
             calculate();
-        } else if (e.keyCode === 46) {
+        } else if (e.key === "Delete") {
             e.preventDefault();
             clearInput();
-        } else if (e.keyCode === 38) {
+        } else if (e.key === "ArrowUp") {
             e.preventDefault();
             historyBack();
-        } else if (e.keyCode === 40) {
+        } else if (e.key === "ArrowDown") {
             e.preventDefault();
             historyForward();
+        } else if (e.key === ".") {
+            e.preventDefault();
+            handleDecimal();
         }
     };
 
     const handleClick = (value) => {
         if (value === ".") {
-            if (!calculatedResult.includes(value)) {
-                setEquationDisplay((val) => (val += value));
-                setCalculatedResult((val) => (val += value));
-            }
+            handleDecimal();
         }
         if (value === "backspace") {
             backspace();
@@ -108,13 +110,23 @@ const AppProvider = ({ children }) => {
     };
 
     const handleOperators = (value) => {
+        const a = equationDisplay.charAt(equationDisplay.length - 1);
+        const b = equationDisplay.charAt(equationDisplay.length - 2);
+
+        if (equationDisplay === "" && value !== "-") return;
+        if (
+            equationDisplay.length === 1 &&
+            isOperator.test(equationDisplay.charAt(0))
+        ) {
+            return;
+        }
         if (equals !== null) {
             setEquationDisplay(`${equals}${value}`);
             setEquals(null);
-        } else if (value === "-") {
-            setEquationDisplay((val) => (val += value));
-        } else if (isOperator.test(calculatedResult)) {
-            if (calculatedResult === "-") {
+        } else if (isOperator.test(a)) {
+            if (value === "-" && isNumber.test(b)) {
+                setEquationDisplay((val) => (val += value));
+            } else if (isOperator.test(b)) {
                 setEquationDisplay(
                     (val) => val.substr(0, val.length - 2) + value
                 );
@@ -129,10 +141,20 @@ const AppProvider = ({ children }) => {
         setCalculatedResult(value);
     };
 
+    const handleDecimal = () => {
+        if (!calculatedResult.includes(".")) {
+            if (!equationDisplay) {
+                setEquationDisplay("0");
+            }
+            setEquationDisplay((val) => (val += "."));
+            setCalculatedResult((val) => (val += "."));
+        }
+    };
+
     const calculate = () => {
         if (equals === null) {
             try {
-                const result = math.evaluate(equationDisplay);
+                const result = math.string(math.evaluate(equationDisplay));
                 setCalculatedResult(result);
                 setEquationDisplay((val) => (val += `=${result}`));
                 setEquals(result);
