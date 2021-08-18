@@ -80,9 +80,9 @@ button {
 button:hover {
     color: white;
 }
-/* button:active {
-    background-color: blue;
-} */
+button:focus {
+    border: blue 1px solid;
+}
 #clear {
     width: 50%;
     background-color: var(--big-number-color);
@@ -112,5 +112,11 @@ button:hover {
     background-color: rgb(218, 109, 47);
 }
 #up {
-    display: none;
+    clip: rect(0 0 0 0);
+    clip-path: inset(100%);
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
 }

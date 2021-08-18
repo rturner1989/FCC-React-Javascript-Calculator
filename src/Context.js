@@ -20,24 +20,23 @@ const AppProvider = ({ children }) => {
 
     const historyBack = () => {
         if (historyIndex !== null && historyIndex >= 0) {
-            clearInput();
             setEquals(null);
             setEquationDisplay(prevCalculation[historyIndex]);
-            setHistoryIndex(historyIndex - 1);
+            if (historyIndex > 0) {
+                setHistoryIndex(historyIndex - 1);
+            }
         }
     };
     const historyForward = () => {
-        if (historyIndex !== null && historyIndex <= prevCalculation.length) {
-            clearInput();
+        if (
+            historyIndex !== null &&
+            historyIndex < prevCalculation.length - 1
+        ) {
             setEquals(null);
-            setEquationDisplay(prevCalculation[historyIndex + 2]);
+            setEquationDisplay(prevCalculation[historyIndex + 1]);
             setHistoryIndex(historyIndex + 1);
         }
     };
-
-    useEffect(() => {
-        setHistoryIndex(prevCalculation.length - 1);
-    }, [prevCalculation]);
 
     const handleKeyPress = (e) => {
         if (isNumber.test(e.key)) {
@@ -65,7 +64,6 @@ const AppProvider = ({ children }) => {
     };
 
     const handleClick = (value) => {
-        console.log(isOperator.test(value));
         if (value === ".") {
             if (!calculatedResult.includes(value)) {
                 setEquationDisplay((val) => (val += value));
@@ -151,6 +149,10 @@ const AppProvider = ({ children }) => {
         setEquationDisplay("");
         setCalculatedResult("0");
     };
+
+    useEffect(() => {
+        setHistoryIndex(prevCalculation.length - 1);
+    }, [prevCalculation]);
 
     return (
         <AppContext.Provider
