@@ -65,6 +65,7 @@ const AppProvider = ({ children }) => {
     };
 
     const handleClick = (value) => {
+        console.log(isOperator.test(value));
         if (value === ".") {
             if (!calculatedResult.includes(value)) {
                 setEquationDisplay((val) => (val += value));
@@ -73,6 +74,18 @@ const AppProvider = ({ children }) => {
         }
         if (value === "backspace") {
             backspace();
+        }
+        if (value === "=") {
+            calculate();
+        }
+        if (value === "AC") {
+            clearInput();
+        }
+        if (isOperator.test(value)) {
+            handleOperators(value);
+        }
+        if (isNumber.test(value)) {
+            handleNumbers(value);
         }
     };
 
@@ -120,12 +133,18 @@ const AppProvider = ({ children }) => {
 
     const calculate = () => {
         if (equals === null) {
-            const result = math.evaluate(equationDisplay);
-            setCalculatedResult(result);
-            setEquationDisplay((val) => (val += `=${result}`));
-            setEquals(result);
-            setPrevCalculation((prevState) => [...prevState, equationDisplay]);
-            console.log(equationDisplay);
+            try {
+                const result = math.evaluate(equationDisplay);
+                setCalculatedResult(result);
+                setEquationDisplay((val) => (val += `=${result}`));
+                setEquals(result);
+                setPrevCalculation((prevState) => [
+                    ...prevState,
+                    equationDisplay,
+                ]);
+            } catch (error) {
+                console.log(error);
+            }
         }
     };
     const clearInput = () => {
