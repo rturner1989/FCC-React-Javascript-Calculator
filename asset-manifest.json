@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/FCC-React-Javascript-Calculator/static/css/main.e63cb070.chunk.css",
-    "main.js": "/FCC-React-Javascript-Calculator/static/js/main.e3ae5ead.chunk.js",
-    "main.js.map": "/FCC-React-Javascript-Calculator/static/js/main.e3ae5ead.chunk.js.map",
+    "main.css": "/FCC-React-Javascript-Calculator/static/css/main.a9b29a67.chunk.css",
+    "main.js": "/FCC-React-Javascript-Calculator/static/js/main.f1f11774.chunk.js",
+    "main.js.map": "/FCC-React-Javascript-Calculator/static/js/main.f1f11774.chunk.js.map",
     "runtime-main.js": "/FCC-React-Javascript-Calculator/static/js/runtime-main.356461dd.js",
     "runtime-main.js.map": "/FCC-React-Javascript-Calculator/static/js/runtime-main.356461dd.js.map",
     "static/css/2.9082872e.chunk.css": "/FCC-React-Javascript-Calculator/static/css/2.9082872e.chunk.css",
@@ -10,14 +10,14 @@
     "static/js/2.d1c3a35b.chunk.js.map": "/FCC-React-Javascript-Calculator/static/js/2.d1c3a35b.chunk.js.map",
     "index.html": "/FCC-React-Javascript-Calculator/index.html",
     "static/css/2.9082872e.chunk.css.map": "/FCC-React-Javascript-Calculator/static/css/2.9082872e.chunk.css.map",
-    "static/css/main.e63cb070.chunk.css.map": "/FCC-React-Javascript-Calculator/static/css/main.e63cb070.chunk.css.map",
+    "static/css/main.a9b29a67.chunk.css.map": "/FCC-React-Javascript-Calculator/static/css/main.a9b29a67.chunk.css.map",
     "static/js/2.d1c3a35b.chunk.js.LICENSE.txt": "/FCC-React-Javascript-Calculator/static/js/2.d1c3a35b.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.356461dd.js",
     "static/css/2.9082872e.chunk.css",
     "static/js/2.d1c3a35b.chunk.js",
-    "static/css/main.e63cb070.chunk.css",
-    "static/js/main.e3ae5ead.chunk.js"
+    "static/css/main.a9b29a67.chunk.css",
+    "static/js/main.f1f11774.chunk.js"
   ]
 }
