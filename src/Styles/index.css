@@ -4,6 +4,8 @@
     --operator-color: rgb(221, 132, 81);
     --number-color: rgb(226, 226, 226);
     --big-number-color: rgb(197, 197, 197);
+    --on-hover-number-color: blue;
+    --on-hover-operator-color: rgb(243, 188, 156);
 }
 
 /* root */
@@ -59,18 +61,19 @@
     color: rgb(195, 195, 195);
     height: 30%;
     width: 100%;
-    padding: 30px;
-    overflow: auto;
+    padding: 25px;
 }
 #input {
     margin: 0;
     text-align: right;
     height: 40px;
+    font-size: 1.4rem;
+    word-break: break-all;
 }
 #display {
     margin: 0;
     text-align: right;
-    font-size: 3.5rem;
+    font-size: 4.5rem;
 }
 
 /* calculator keypad */
@@ -90,10 +93,13 @@ button {
     background-color: var(--number-color);
 }
 button:hover {
-    color: white;
+    background-color: white;
+    border: 2px solid var(--on-hover-number-color);
+    color: var(--on-hover-number-color);
+    font-weight: 1000;
 }
 button:focus {
-    border: blue 2px solid;
+    border: var(--on-hover-number-color) 2px solid;
 }
 button:active {
     border: none;
@@ -102,9 +108,14 @@ button:active {
     width: 50%;
     background-color: var(--big-number-color);
 }
-
 #backspace {
     background-color: var(--big-number-color);
+}
+#clear:hover,
+#backspace:hover {
+    background-color: darkgray;
+    color: white;
+    font-weight: 1000;
 }
 #zero {
     width: 50%;
@@ -126,6 +137,14 @@ button:active {
     border-bottom-right-radius: 18px;
     background-color: rgb(218, 109, 47);
 }
+#divide:hover,
+#multiply:hover,
+#subtract:hover,
+#add:hover,
+#equals:hover {
+    background-color: var(--on-hover-operator-color);
+    color: black;
+}
 #up {
     clip: rect(0 0 0 0);
     clip-path: inset(100%);
@@ -136,6 +155,36 @@ button:active {
     white-space: nowrap;
 }
 @media screen and (max-width: 480px) {
+    html,
+    body {
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+    body {
+        position: relative;
+    }
+    #calculator {
+        min-width: 350px;
+        width: 100vw;
+        max-width: 450px;
+        min-height: 500px;
+        height: 100vh;
+        max-height: 700px;
+        border-radius: 0;
+    }
+    .display {
+        border-radius: 0;
+    }
+
+    #keypad {
+        border-radius: 0;
+    }
+    #zero,
+    #equals {
+        border-radius: 0;
+    }
+}
+@media screen and (max-height: 600px) {
     html,
     body {
         overflow-x: hidden;

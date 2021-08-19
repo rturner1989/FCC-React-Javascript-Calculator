@@ -167,6 +167,7 @@ const AppProvider = ({ children }) => {
             }
         }
     };
+
     const clearInput = () => {
         setEquationDisplay("");
         setCalculatedResult("0");
@@ -187,6 +188,7 @@ const AppProvider = ({ children }) => {
                 calculate,
                 equationDisplay,
                 calculatedResult,
+                setCalculatedResult,
             }}
         >
             {children}
